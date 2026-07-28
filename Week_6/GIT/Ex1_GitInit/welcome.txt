@@ -1,0 +1,2 @@
+Welcome to Git Demo
+This file demonstrates git init, add, commit, push, and pull commands.
