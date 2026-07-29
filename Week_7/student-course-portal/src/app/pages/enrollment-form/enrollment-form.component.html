@@ -1,0 +1,51 @@
+<div style="padding: 20px; max-width: 500px;">
+  <h2>Enrollment Request (Template-Driven)</h2>
+
+  <div *ngIf="submitted" style="background: #e8f5e9; padding: 15px; border-radius: 8px; margin-bottom: 15px; color: #2e7d32;">
+    Enrollment request submitted successfully!
+  </div>
+
+  <form #enrollForm="ngForm" (ngSubmit)="onSubmit(enrollForm)">
+    <div style="margin-bottom: 15px;">
+      <label>Student Name:</label><br>
+      <input #nameCtrl="ngModel" type="text" name="studentName" [(ngModel)]="enrollForm.value.studentName" required minlength="3" style="width: 100%; padding: 8px; box-sizing: border-box;">
+      <span *ngIf="nameCtrl.touched && nameCtrl.errors?.['required']" style="color: red;">Name is required</span>
+      <span *ngIf="nameCtrl.touched && nameCtrl.errors?.['minlength']" style="color: red;">Name must be at least 3 characters</span>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label>Student Email:</label><br>
+      <input #emailCtrl="ngModel" type="email" name="studentEmail" [(ngModel)]="enrollForm.value.studentEmail" required email style="width: 100%; padding: 8px; box-sizing: border-box;">
+      <span *ngIf="emailCtrl.touched && emailCtrl.errors?.['required']" style="color: red;">Email is required</span>
+      <span *ngIf="emailCtrl.touched && emailCtrl.errors?.['email']" style="color: red;">Please enter a valid email</span>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label>Course ID:</label><br>
+      <input #courseCtrl="ngModel" type="number" name="courseId" [(ngModel)]="enrollForm.value.courseId" required style="width: 100%; padding: 8px; box-sizing: border-box;">
+      <span *ngIf="courseCtrl.touched && courseCtrl.errors?.['required']" style="color: red;">Course ID is required</span>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label>Preferred Semester:</label><br>
+      <select name="preferredSemester" [(ngModel)]="enrollForm.value.preferredSemester" required style="width: 100%; padding: 8px;">
+        <option value="Odd">Odd</option>
+        <option value="Even">Even</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label>
+        <input type="checkbox" name="agreeToTerms" [(ngModel)]="enrollForm.value.agreeToTerms" required>
+        I agree to the terms
+      </label>
+    </div>
+
+    <button type="submit" [disabled]="enrollForm.invalid" style="padding: 10px 20px; background: #1976d2; color: white; border: none; border-radius: 4px; cursor: pointer; margin-right: 10px;">
+      Submit
+    </button>
+    <button type="button" (click)="onReset(enrollForm)" style="padding: 10px 20px; background: #757575; color: white; border: none; border-radius: 4px; cursor: pointer;">
+      Reset
+    </button>
+  </form>
+</div>

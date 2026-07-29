@@ -1,0 +1,26 @@
+<div style="padding: 20px;">
+  <h2>Course Listing</h2>
+
+  <div *ngIf="isLoading$ | async">Loading courses...</div>
+
+  <div *ngIf="error$ as error">
+    <div style="background: #ffebee; padding: 15px; border-radius: 8px; color: #c62828;">
+      {{ error }}
+    </div>
+  </div>
+
+  <ng-container *ngIf="{ courses: courses$ | async, enrolledIds: enrolledIds$ | async } as data">
+    <div *ngIf="data.courses && data.courses.length > 0">
+      <app-course-card
+        *ngFor="let c of data.courses; trackBy: trackByCourseId"
+        [course]="c"
+        [enrolled]="data.enrolledIds?.includes(c.id) ?? false"
+        (enrollRequested)="onEnroll($event, data.enrolledIds ?? [])">
+      </app-course-card>
+    </div>
+
+    <div *ngIf="data.courses && data.courses.length === 0 && !(isLoading$ | async)">
+      <p>No courses available.</p>
+    </div>
+  </ng-container>
+</div>

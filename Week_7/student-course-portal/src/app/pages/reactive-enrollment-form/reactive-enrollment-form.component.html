@@ -1,0 +1,57 @@
+<div style="padding: 20px; max-width: 500px;">
+  <h2>Enrollment Request (Reactive Form)</h2>
+
+  <form [formGroup]="enrollForm" (ngSubmit)="onSubmit()">
+    <div style="margin-bottom: 15px;">
+      <label>Student Name:</label><br>
+      <input type="text" formControlName="studentName" style="width: 100%; padding: 8px; box-sizing: border-box;">
+      <span *ngIf="enrollForm.get('studentName')?.touched && enrollForm.get('studentName')?.errors?.['required']" style="color: red;">Name is required</span>
+      <span *ngIf="enrollForm.get('studentName')?.errors?.['minlength']" style="color: red;">Name must be at least 3 characters</span>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label>Student Email:</label><br>
+      <input type="email" formControlName="studentEmail" style="width: 100%; padding: 8px; box-sizing: border-box;">
+      <span *ngIf="enrollForm.get('studentEmail')?.errors?.['required']" style="color: red;">Email is required</span>
+      <span *ngIf="enrollForm.get('studentEmail')?.errors?.['email']" style="color: red;">Invalid email</span>
+      <span *ngIf="enrollForm.get('studentEmail')?.errors?.['emailTaken']" style="color: red;">Email taken</span>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label>Course ID:</label><br>
+      <input type="text" formControlName="courseId" style="width: 100%; padding: 8px; box-sizing: border-box;">
+      <span *ngIf="enrollForm.get('courseId')?.errors?.['required']" style="color: red;">Course ID is required</span>
+      <span *ngIf="enrollForm.get('courseId')?.errors?.['noCourseCode']" style="color: red;">Course code starting with XX is not allowed.</span>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label>Preferred Semester:</label><br>
+      <select formControlName="preferredSemester" style="width: 100%; padding: 8px;">
+        <option value="Odd">Odd</option>
+        <option value="Even">Even</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label>
+        <input type="checkbox" formControlName="agreeToTerms">
+        I agree to the terms
+      </label>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label>Additional Courses:</label>
+      <div *ngFor="let ctrl of additionalCourseControls; let i = index" style="display: flex; gap: 10px; margin-top: 5px;">
+        <input [formControl]="ctrl" type="text" style="flex: 1; padding: 8px;">
+        <button type="button" (click)="removeCourse(i)" style="padding: 5px 10px; background: red; color: white; border: none; border-radius: 4px;">Remove</button>
+      </div>
+      <button type="button" (click)="addCourse()" style="margin-top: 10px; padding: 8px 16px; background: #4caf50; color: white; border: none; border-radius: 4px; cursor: pointer;">
+        Add Another Course
+      </button>
+    </div>
+
+    <button type="submit" [disabled]="enrollForm.invalid" style="padding: 10px 20px; background: #1976d2; color: white; border: none; border-radius: 4px; cursor: pointer;">
+      Submit
+    </button>
+  </form>
+</div>

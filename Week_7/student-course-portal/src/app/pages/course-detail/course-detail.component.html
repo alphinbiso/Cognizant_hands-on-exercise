@@ -1,0 +1,10 @@
+<div style="padding: 20px;" *ngIf="course">
+  <h2>{{ course.name }}</h2>
+  <p><strong>Code:</strong> {{ course.code }}</p>
+  <p><strong>Credits:</strong> {{ course.credits }}</p>
+  <p><strong>Status:</strong> {{ course.gradeStatus }}</p>
+  <a routerLink="/courses">Back to Courses</a>
+</div>
+<div *ngIf="!course" style="padding: 20px;">
+  <h2>Course not found</h2>
+</div>

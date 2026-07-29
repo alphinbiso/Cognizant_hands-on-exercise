@@ -1,0 +1,6 @@
+:host ::ng-deep .ng-invalid.ng-touched {
+  border-color: red;
+}
+:host ::ng-deep .ng-valid.ng-touched {
+  border-color: green;
+}

@@ -1,0 +1,26 @@
+.course-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 8px;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  width: 280px;
+  display: inline-block;
+  vertical-align: top;
+  transition: height 0.3s ease;
+  min-height: 160px;
+}
+.course-card h3 {
+  margin-top: 0;
+  color: #1976d2;
+}
+.card--enrolled {
+  background: #e8f5e9;
+}
+.card--full {
+  border-top: 3px solid #ff9800;
+}
+.expanded {
+  min-height: 260px;
+}
